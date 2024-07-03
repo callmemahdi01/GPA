@@ -1,6 +1,6 @@
 const CACHE_NAME = 'gpa-calculator-cache-v1';
 const urlsToCache = [
-    '/',
+    'https://callmemahdi01.github.io/GPA/',
     '/index.html',
     '/styles.css',
     '/script.js',
