@@ -12,31 +12,11 @@
             padding: 20px;
             background-color: #f4f4f4;
             margin: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        body.dark-mode {
-            background-color: #333;
-            color: #fff;
         }
         h1 {
             text-align: center;
             font-size: 2em;
             margin-bottom: 20px;
-        }
-        .toggle-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .toggle-button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .toggle-button:hover {
-            background-color: #45a049;
         }
         table {
             width: 100%;
@@ -94,9 +74,6 @@
     </style>
 </head>
 <body>
-    <div class="toggle-container">
-        <button class="toggle-button" onclick="toggleDarkMode()">تغییر حالت</button>
-    </div>
     <h1>محاسبه معدل</h1>
     <table id="gradesTable">
         <thead>
@@ -123,10 +100,6 @@
     <h2 id="gpaResult">معدل کل: </h2>
 
     <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
         function addRow() {
             const table = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
             const newRow = table.insertRow();
