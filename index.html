@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محاسبه معدل</title>
+    <link rel="manifest" href="/manifest.json">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,9 +34,10 @@
             background-color: #f2f2f2;
         }
         input[type="text"], input[type="number"] {
-            width: 90%;
+            width: 100%;
             padding: 5px;
             box-sizing: border-box;
+            font-size: 1em;
         }
         .button-container {
             text-align: center;
@@ -86,7 +88,7 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" name="courseName" placeholder="نام درس"></td>
+                <td><input type="text" name="courseName" placeholder="نام درس (اختیاری)"></td>
                 <td><input type="number" name="courseUnits" placeholder="تعداد واحد"></td>
                 <td><input type="number" name="courseGrade" placeholder="نمره از 20" max="20" min="0"></td>
                 <td><button class="button" onclick="removeRow(this)">حذف</button></td>
@@ -132,6 +134,15 @@
 
             const gpa = totalPoints / totalUnits;
             document.getElementById('gpaResult').innerText = `معدل کل: ${gpa.toFixed(2)}`;
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker ثبت شد با محدوده: ', registration.scope);
+                }).catch(error => {
+                    console.log('ثبت Service Worker با خطا مواجه شد: ', error);
+                });
         }
     </script>
 </body>
