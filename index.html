@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاسبه معدل</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>محاسبه معدل</h1>
+    <table id="gradesTable">
+        <thead>
+            <tr>
+                <th>نام درس</th>
+                <th>تعداد واحد</th>
+                <th>نمره</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" name="courseName" placeholder="نام درس"></td>
+                <td><input type="number" name="courseUnits" placeholder="تعداد واحد"></td>
+                <td><input type="number" name="courseGrade" placeholder="نمره از 20" max="20" min="0"></td>
+                <td><button class="button" onclick="removeRow(this)">حذف</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="button-container">
+        <button class="button" onclick="addRow()">اضافه کردن ردیف</button>
+        <button class="button" onclick="calculateGPA()">محاسبه معدل</button>
+    </div>
+    <h2 id="gpaResult">معدل کل: </h2>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" name="courseName" placeholder="نام درس"></td>
+                <td><input type="number" name="courseUnits" placeholder="تعداد واحد"></td>
+                <td><input type="number" name="courseGrade" placeholder="نمره از 20" max="20" min="0"></td>
+                <td><button class="button" onclick="removeRow(this)">حذف</button></td>
+            `;
+        }
+
+        function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function calculateGPA() {
+            const rows = document.getElementById('gradesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            let totalUnits = 0;
+            let totalPoints = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const units = parseFloat(rows[i].getElementsByTagName('input')[1].value);
+                const grade = parseFloat(rows[i].getElementsByTagName('input')[2].value);
+                if (!isNaN(units) && !isNaN(grade)) {
+                    totalUnits += units;
+                    totalPoints += units * grade;
+                }
+            }
+
+            const gpa = totalPoints / totalUnits;
+            document.getElementById('gpaResult').innerText = `معدل کل: ${gpa.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
