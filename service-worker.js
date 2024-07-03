@@ -1,12 +1,12 @@
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('https://callmemahdi01.github.io/GPA/service-worker.js')
-                .then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }).catch(function(error) {
-                    console.log('Service Worker registration failed:', error);
-                });
-        });
-    }
-</script>
+self.addEventListener('install', function(event) {
+    console.log('Service Worker installed');
+});
+
+self.addEventListener('activate', function(event) {
+    console.log('Service Worker activated');
+});
+
+self.addEventListener('fetch', function(event) {
+    console.log('Fetching:', event.request.url);
+    event.respondWith(fetch(event.request));
+});
