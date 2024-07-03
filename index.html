@@ -11,14 +11,38 @@
             text-align: right;
             padding: 20px;
             background-color: #f4f4f4;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
         }
         h1 {
             text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .toggle-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .toggle-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .toggle-button:hover {
+            background-color: #45a049;
         }
         table {
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;
+            overflow-x: auto;
         }
         th, td {
             padding: 10px;
@@ -27,6 +51,11 @@
         }
         th {
             background-color: #f2f2f2;
+        }
+        input[type="text"], input[type="number"] {
+            width: 90%;
+            padding: 5px;
+            box-sizing: border-box;
         }
         .button-container {
             text-align: center;
@@ -44,9 +73,30 @@
         .button:hover {
             background-color: #45a049;
         }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            th, td {
+                font-size: 0.8em;
+                padding: 5px;
+            }
+            .button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            input[type="text"], input[type="number"] {
+                width: 100%;
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="toggle-container">
+        <button class="toggle-button" onclick="toggleDarkMode()">تغییر حالت</button>
+    </div>
     <h1>محاسبه معدل</h1>
     <table id="gradesTable">
         <thead>
@@ -73,6 +123,10 @@
     <h2 id="gpaResult">معدل کل: </h2>
 
     <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
         function addRow() {
             const table = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
             const newRow = table.insertRow();
