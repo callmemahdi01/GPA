@@ -1,7 +1,7 @@
 {
     "name": "محاسبه معدل",
     "short_name": "GPA",
-    "description": "اپلیکیشنی برای محاسبه معدل دانشجویان",
+    "description": "اپلیکیشن برای محاسبه معدل دانشجویان",
     "start_url": "/GPA/index.html",
     "display": "standalone",
     "background_color": "#f4f4f4",
