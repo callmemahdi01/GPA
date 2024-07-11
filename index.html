@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محاسبه معدل</title>
+    <title>نرم افزار محاسبه معدل</title>
+    <meta name="description" content="سلام تا حالا شده بخوای قبل از نهایی شدن نمره دروس معدلتو حساب کنی؟ <br> <br> GPA application 💫 at your service😉">
+    <meta name="keywords" content="محاسبه معدل, نرم افزار محاسبه معدل, GPA, محاسبه نمره, معدل دانشگاهی">
     <link rel="manifest" href="https://callmemahdi01.github.io/GPA/manifest.json">
     <link rel="icon" href="https://callmemahdi01.github.io/GPA/icons/icon-192x192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="https://callmemahdi01.github.io/GPA/icons/icon-192x192.png">
@@ -22,11 +24,17 @@
             font-size: 2em;
             margin-bottom: 20px;
         }
+        .table-container {
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
         table {
             width: 100%;
-            margin-top: 20px;
             border-collapse: collapse;
             overflow-x: auto;
+            border-radius: 10px;
+            overflow: hidden;
         }
         th, td {
             padding: 10px;
@@ -37,9 +45,12 @@
             background-color: #f2f2f2;
         }
         input[type="text"], input[type="number"] {
-            width: 90%;
-            padding: 5px;
+            width: 95%;
+            padding: px;
             box-sizing: border-box;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-family: delbar;
         }
         .button-container {
             text-align: center;
@@ -61,44 +72,74 @@
             text-align: center;
             margin-top: 20px;
         }
-        @media (max-width: 600px) {
+        #button_x{
+            padding: 2.5px 5px;
+            margin: 5px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 100px;
+            
+        }
+        @media (max-width: 768px) {
+            .table-container {
+                width: 100%;
+            }
             th, td {
                 font-size: 0.8em;
                 padding: 5px;
             }
             .button {
-                padding: 8px 15px;
+                padding: 1px 15px;
                 font-size: 0.9em;
+                border-radius: 50px;
+                font-family: delbar;
             }
             input[type="text"], input[type="number"] {
                 width: 100%;
                 font-size: 0.9em;
+                text-align: center;
             }
+        @font-face {
+            font-family: "delbar";
+            src: url("./ttf/delbar.ttf");
+        }
+        
+            .txt{
+                font-family: delbar;
+            }
+            #gpaResult{
+                font-family: delbar;
+            }
+
         }
     </style>
 </head>
 <body>
-    <h1>محاسبه معدل</h1>
-    <table id="gradesTable">
-        <thead>
-            <tr>
-                <th>نام درس</th>
-                <th>تعداد واحد</th>
-                <th>نمره</th>
-                <th>عملیات</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="text" name="courseName" placeholder="نام درس (اختیاری)"></td>
-                <td><input type="number" name="courseUnits" placeholder="تعداد واحد"></td>
-                <td><input type="number" name="courseGrade" placeholder="نمره از 20" max="20" min="0"></td>
-                <td><button class="button" onclick="removeRow(this)">حذف</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <h1 class="txt">محاسبه معدل کل</h1>
+    <div class="table-container">
+        <table id="gradesTable">
+            <thead>
+                <tr>
+                    <th class="txt">نام درس</th>
+                    <th class="txt">نمره</th>
+                    <th class="txt">واحد</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="courseName" placeholder="(اختیاری)"></td>
+                    <td><input type="number" name="courseGrade" placeholder="از 20 نمره" max="20" min="0"></td>
+                    <td><input type="number" name="courseUnits" placeholder="مثلا 2 واحد"></td>
+                    <td><button id="button_x" onclick="removeRow(this)">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="button-container">
-        <button class="button" onclick="addRow()">اضافه کردن ردیف</button>
+        <button class="button" onclick="addRow()">افزودن ردیف جدید</button>
         <button class="button" onclick="calculateGPA()">محاسبه معدل</button>
     </div>
     <h2 id="gpaResult">معدل کل: </h2>
@@ -108,10 +149,10 @@
             const table = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
             const newRow = table.insertRow();
             newRow.innerHTML = `
-                <td><input type="text" name="courseName" placeholder="نام درس (اختیاری)"></td>
-                <td><input type="number" name="courseUnits" placeholder="تعداد واحد"></td>
-                <td><input type="number" name="courseGrade" placeholder="نمره از 20" max="20" min="0"></td>
-                <td><button class="button" onclick="removeRow(this)">حذف</button></td>
+                <td><input type="text" name="courseName" placeholder="(اختیاری)"></td>
+                <td><input type="number" name="courseGrade" placeholder="از 20 نمره" max="20" min="0"></td>
+                <td><input type="number" name="courseUnits" placeholder="مثلا 2 واحد"></td>
+                <td><button id="button_x" onclick="removeRow(this)">X</button></td>
             `;
         }
 
@@ -126,8 +167,8 @@
             let totalPoints = 0;
 
             for (let i = 0; i < rows.length; i++) {
-                const units = parseFloat(rows[i].getElementsByTagName('input')[1].value);
-                const grade = parseFloat(rows[i].getElementsByTagName('input')[2].value);
+                const grade = parseFloat(rows[i].getElementsByTagName('input')[1].value);
+                const units = parseFloat(rows[i].getElementsByTagName('input')[2].value);
                 if (!isNaN(units) && !isNaN(grade)) {
                     totalUnits += units;
                     totalPoints += units * grade;
