@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gpa-cache-v1';
+const CACHE_NAME = 'gpa-cache-v2';
 const urlsToCache = [
     '/GPA/',
     '/GPA/index.html',
