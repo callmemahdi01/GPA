@@ -1,7 +1,7 @@
 const CACHE_NAME = 'gpa-cache-v2.2';
 const urlsToCache = [
     '/GPA/',
-    '/GPA/index.html',
+    '/GPA/index.html?v=2.2',
     '/GPA/icons/icon-192x192.png',
     '/GPA/icons/icon-512x512.png',
     '/GPA/manifest.json'
