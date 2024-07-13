@@ -6,11 +6,37 @@ body {
     background-color: #f4f4f4;
     margin: 0;
 }
-h1 {
+
+header {
+    background-color: #cdcdcd;
+    color: rgb(0, 0, 0);
     text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
+    border-radius: 20px;
+    margin: 0% 19%; 
+    height: 118px;
 }
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0px 20px;
+    background-color: rgb(255, 136, 136);
+    border-radius: 10px;
+    margin: 0px 20px;
+}
+
+nav ul li a {
+    color: rgb(0, 85, 254);
+    text-decoration: none;
+    font-family: delbar;
+    font-size: .8em;
+}
+
+
 .table-container {
     width: 60%;
     margin: 0 auto;
@@ -23,6 +49,16 @@ table {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 1px 1px 10px 0px;
+    transition: 200ms;
+}
+table:hover {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 1px 10px 0px;
+    transform: translateY(-2px);
 }
 th, td {
     padding: 10px;
@@ -83,6 +119,29 @@ h2 {
     box-shadow: 0px 0px 5px black;
     transform: translateY(-2px);
 }
+
+p{
+    font-family: delbar;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0% 20%;
+    text-align: center;
+}
+.about-link{
+    font-family: delbar;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    margin: 4% 20%;
+    text-align: center;
+}
+footer h1{
+    background-color: #cdcdcd;
+    text-align: center;
+    border-radius: 10px;
+    margin: 4% 20%;
+}
+
 @media (max-width: 768px) {
     .table-container {
         width: 100%;
@@ -103,6 +162,35 @@ h2 {
         font-size: 0.9em;
         text-align: center;
     }
+
+    header {
+        background-color: #cdcdcd;
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        text-align: center;
+        border-radius: 30px;
+        margin: 0% 0%; 
+    }
+    p{
+        font-family: delbar;
+        background-color: #d9d9d9;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 0%;
+    }
+    .about-link{
+        font-family: delbar;
+        background-color: #d9d9d9;
+        border-radius: 10px;
+        margin: 4% 0%;
+        text-align: center;
+    }
+    footer h1{
+        background-color: #cdcdcd;
+        text-align: center;
+        border-radius: 10px;
+        margin: 4% 0%;
+    }
 }
 @font-face {
     font-family: "delbar";
@@ -113,4 +201,16 @@ h2 {
 }
 #gpaResult {
     font-family: delbar;
+}
+
+
+.footer-txt{
+    font-family: delbar;
+    margin: 0px 0px 0px 0px;
+}
+
+a img{
+    display: block;
+    width: 30%;
+    margin: auto;
 }

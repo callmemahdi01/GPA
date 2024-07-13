@@ -1,0 +1,75 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    margin: 0;
+    text-align: center;
+}
+
+.card-container {
+    position: relative;
+    width: 300px; /* عرض تصویر کارت بانکی */
+    height: 200px; /* ارتفاع تصویر کارت بانکی */
+}
+
+.bank-card {
+    width: 100%;
+    height: 100%;
+}
+
+.card-number {
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 222, 37);
+    text-shadow: 0px 0px 10px white;
+    font-size: 23px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    user-select: none; /* جلوگیری از انتخاب متن */
+    text-align: center;
+    width: 250px;
+    transition: all 200ms; /* افکت انتقال برای تمام ویژگی‌ها */
+}
+
+.card-number:hover {
+    font-size: 24px; /* بزرگ‌تر شدن فونت */
+    filter: drop-shadow(0px 0px 10px rgb(223, 220, 0)); /* سایه */
+    color: gold;
+}
+.card-text.top-text{
+    color: rgb(36, 11, 11);
+    font-family: delbar;
+    background-color: #e3e3e3;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.card-text.bottom-text{
+    color: red;
+    font-family: delbar;
+    background-color: #e3e3e3;
+    border-radius: 10px;
+}
+
+@font-face {
+    font-family: "delbar";
+    src: url("./ttf/delbar.ttf");
+}
+.copy-notification {
+    position: fixed;
+    top: 20px; /* فاصله از پایین */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    z-index: 1000; /* بالاتر از سایر عناصر */
+    transition: opacity 0.5s;
+    opacity: 1;
+}
