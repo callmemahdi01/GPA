@@ -57,7 +57,7 @@ body {
 
 @font-face {
     font-family: "delbar";
-    src: url("./ttf/delbar.ttf");
+    src: url("./fonts/delbar.woff2");
 }
 .copy-notification {
     position: fixed;
