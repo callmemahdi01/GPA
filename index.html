@@ -10,7 +10,7 @@
     <link rel="icon" href="https://callmemahdi01.github.io/GPA/icons/icon-192x192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="https://callmemahdi01.github.io/GPA/icons/icon-192x192.png">
     <meta name="theme-color" content="#4CAF50">
-    <link rel="stylesheet" href="style.css?v=2.3">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- ----------------------------------- -->
@@ -30,6 +30,7 @@
         <table id="gradesTable">
             <thead>
                 <tr>
+                    <th class="txt"></th> <!-- ستون جدید برای شماره ردیف -->
                     <th class="txt">نام درس</th>
                     <th class="txt">نمره</th>
                     <th class="txt">واحد</th>
@@ -38,34 +39,38 @@
             </thead>
             <tbody>
                 <tr>
+                    <td class="row-number">1</td> <!-- شماره ردیف -->
                     <td><input type="text" name="courseName" placeholder="(اختیاری)"></td>
                     <td><input type="number" name="courseGrade" placeholder="از 20 نمره" max="20" min="0"></td>
                     <td><input type="number" name="courseUnits" placeholder="مثلا 2 واحد"></td>
-                    <td><button id="button_x" onclick="removeRow(this)">X</button></td>
+                    <td><button title="حذف" id="button_x" onclick="removeRow(this)">X</button></td>
                 </tr>
             </tbody>
+            
         </table>
     </div>
     <div class="button-container">
 
         <div>
             <button class="button" onclick="saveGrades()">ذخیره دروس</button>
-        <button class="button" onclick="clearCache()">حذف دروس</button>
+            <button class="button" onclick="clearCache()">حذف دروس</button>
         </div>
 
         <div>
+            <button class="button" onclick="addRequiredCourses()">افزودن دروس ضروری</button>
             <button class="button" onclick="addRow()">افزودن ردیف</button>
+        </div>
+        <div>
             <button class="button" onclick="calculateGPA()">محاسبه معدل</button>
         </div>
     </div>
 
+
     <h2 id="gpaResult">معدل کل: </h2>
 
-     <!-- پیام موفقیت -->
-     <div id="successMessage" class="success-message">دروس با موفقیت ذخیره شدند!</div>
+    <div id="successMessage" class="success-message">ذخیره موفقیت‌آمیز بود</div>
 
-
-    <script src="script.js?v=2.3"></script>
+    <script src="script.js"></script>
     
 </body>
 </html>

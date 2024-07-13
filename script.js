@@ -1,17 +1,22 @@
 function addRow() {
     const table = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
+    const rowIndex = table.rows.length; // به‌دست آوردن شماره ردیف جدید
+
     newRow.innerHTML = `
+        <td class="row-number">${rowIndex}</td> <!-- شماره ردیف -->
         <td><input type="text" name="courseName" placeholder="(اختیاری)"></td>
         <td><input type="number" name="courseGrade" placeholder="از 20 نمره" max="20" min="0"></td>
         <td><input type="number" name="courseUnits" placeholder="مثلا 2 واحد"></td>
         <td><button id="button_x" onclick="removeRow(this)">X</button></td>
     `;
+    updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها
 }
 
 function removeRow(button) {
     const row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
+    updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها پس از حذف یک ردیف
 }
 
 function calculateGPA() {
@@ -46,6 +51,13 @@ function saveGrades() {
     }
 
     localStorage.setItem('courses', JSON.stringify(courses));
+
+    // نمایش پیام موفقیت
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.add('show');
+    setTimeout(() => {
+        successMessage.classList.remove('show');
+    }, 3000); // پیام بعد از 3 ثانیه مخفی می‌شود
 }
 
 function loadGrades() {
@@ -53,15 +65,17 @@ function loadGrades() {
     const tableBody = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = ''; // Clear existing rows
 
-    courses.forEach(course => {
+    courses.forEach((course, index) => {
         const newRow = tableBody.insertRow();
         newRow.innerHTML = `
+            <td class="row-number">${index + 1}</td> <!-- شماره ردیف -->
             <td><input type="text" name="courseName" value="${course.name}" placeholder="(اختیاری)"></td>
             <td><input type="number" name="courseGrade" value="${course.grade}" placeholder="از 20 نمره" max="20" min="0"></td>
             <td><input type="number" name="courseUnits" value="${course.units}" placeholder="مثلا 2 واحد"></td>
             <td><button id="button_x" onclick="removeRow(this)">X</button></td>
         `;
     });
+    updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها
 }
 
 document.addEventListener('DOMContentLoaded', loadGrades);
@@ -76,38 +90,36 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
 function clearCache() {
     localStorage.clear(); // تمام مقادیر ذخیره شده در localStorage را پاک می‌کند
     location.reload();
 }
-function showSuccessMessage() {
-    const messageElement = document.getElementById('successMessage');
-    messageElement.style.display = 'block';
-    setTimeout(() => {
-        messageElement.classList.add('show');
-    }, 10); // مقدار کوچکی از تأخیر برای فعال‌سازی ترنزیشن
 
-    setTimeout(() => {
-        messageElement.classList.remove('show');
-        setTimeout(() => {
-            messageElement.style.display = 'none';
-        }, 500); // زمان تطابق با مدت ترنزیشن در CSS
-    }, 2000); // پیام بعد از 2 ثانیه مخفی می‌شود
+function addRequiredCourses() {
+    fetch('requiredCourses.json')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('gradesTable').getElementsByTagName('tbody')[0];
+
+            data.forEach((course, index) => {
+                const newRow = tableBody.insertRow();
+                newRow.innerHTML = `
+                    <td class="row-number">${tableBody.rows.length + 1}</td> <!-- شماره ردیف -->
+                    <td><input type="text" name="courseName" value="${course.name}" placeholder="(اختیاری)" readonly></td>
+                    <td><input type="number" name="courseGrade" placeholder="از 20 نمره" max="20" min="0"></td>
+                    <td><input type="number" name="courseUnits" value="${course.units}" placeholder="مثلا 2 واحد" readonly></td>
+                    <td><button id="button_x" onclick="removeRow(this)">X</button></td>
+                `;
+            });
+            updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها
+        })
+        .catch(error => console.error('Error loading required courses:', error));
 }
 
-function saveGrades() {
+function updateRowNumbers() {
     const rows = document.getElementById('gradesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-    const courses = [];
-
     for (let i = 0; i < rows.length; i++) {
-        const name = rows[i].getElementsByTagName('input')[0].value;
-        const grade = rows[i].getElementsByTagName('input')[1].value;
-        const units = rows[i].getElementsByTagName('input')[2].value;
-        if (name || grade || units) {
-            courses.push({ name, grade, units });
-        }
+        rows[i].getElementsByClassName('row-number')[0].innerText = i + 1;
     }
-
-    localStorage.setItem('courses', JSON.stringify(courses));
-    showSuccessMessage(); // نمایش پیام موفقیت
 }
