@@ -201,6 +201,13 @@ footer h1{
 }
 #gpaResult {
     font-family: delbar;
+    transition: 200ms;
+}
+
+#gpaResult:hover {
+    font-family: delbar;
+    transform: translateY(-2px);
+    text-shadow: 0px 0px 2px rgb(255, 234, 0);
 }
 
 
@@ -213,4 +220,25 @@ a img{
     display: block;
     width: 30%;
     margin: auto;
+    border-radius: 15px;
 }
+
+.success-message {
+    display: none;
+    text-align: center;
+    background-color: #d3d3d3; /* رنگ خاکستری */
+    color: #333; /* رنگ متن */
+    border-radius: 10px;
+    font-family: delbar, Arial, sans-serif;
+    width: 200px; /* عرض باکس */
+    margin: 20px auto; /* مرکز کردن باکس */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* افزودن ترنزیشن برای opacity */
+    box-shadow: 0px 0px 15px #333;
+}
+
+.success-message.show {
+    display: block;
+    opacity: 0.6; /* تغییر opacity برای نمایش باکس */
+}
+

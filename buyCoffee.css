@@ -61,15 +61,15 @@ body {
 }
 .copy-notification {
     position: fixed;
-    top: 20px; /* فاصله از پایین */
+    top: 25%; /* فاصله از پایین */
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 10px 20px;
+    padding: 0px 20px;
     border-radius: 5px;
-    font-family: Arial, sans-serif;
+    font-family: delbar, Arial, sans-serif;
     z-index: 1000; /* بالاتر از سایر عناصر */
-    transition: opacity 0.5s;
-    opacity: 1;
+    transition: 200ms;
+    opacity: .6;
 }

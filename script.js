@@ -80,3 +80,34 @@ function clearCache() {
     localStorage.clear(); // تمام مقادیر ذخیره شده در localStorage را پاک می‌کند
     location.reload();
 }
+function showSuccessMessage() {
+    const messageElement = document.getElementById('successMessage');
+    messageElement.style.display = 'block';
+    setTimeout(() => {
+        messageElement.classList.add('show');
+    }, 10); // مقدار کوچکی از تأخیر برای فعال‌سازی ترنزیشن
+
+    setTimeout(() => {
+        messageElement.classList.remove('show');
+        setTimeout(() => {
+            messageElement.style.display = 'none';
+        }, 500); // زمان تطابق با مدت ترنزیشن در CSS
+    }, 2000); // پیام بعد از 2 ثانیه مخفی می‌شود
+}
+
+function saveGrades() {
+    const rows = document.getElementById('gradesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    const courses = [];
+
+    for (let i = 0; i < rows.length; i++) {
+        const name = rows[i].getElementsByTagName('input')[0].value;
+        const grade = rows[i].getElementsByTagName('input')[1].value;
+        const units = rows[i].getElementsByTagName('input')[2].value;
+        if (name || grade || units) {
+            courses.push({ name, grade, units });
+        }
+    }
+
+    localStorage.setItem('courses', JSON.stringify(courses));
+    showSuccessMessage(); // نمایش پیام موفقیت
+}
