@@ -10,13 +10,23 @@ function addRow() {
         <td><input type="number" name="courseUnits" placeholder="مثلا 2 واحد"></td>
         <td><button id="button_x" onclick="removeRow(this)">X</button></td>
     `;
+
+    // اضافه کردن کلاس انیمیشن برای اضافه کردن ردیف
+    newRow.classList.add('fade-in');
+    setTimeout(() => newRow.classList.remove('fade-in'), 500); // حذف کلاس انیمیشن پس از اتمام
+
     updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها
 }
 
 function removeRow(button) {
     const row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-    updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها پس از حذف یک ردیف
+    
+    // اضافه کردن کلاس انیمیشن برای حذف کردن ردیف
+    row.classList.add('fade-out');
+    setTimeout(() => {
+        row.parentNode.removeChild(row);
+        updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها پس از حذف یک ردیف
+    }, 500); // زمان انیمیشن باید با زمان تعریف شده در CSS هماهنگ باشد
 }
 
 function calculateGPA() {
@@ -111,6 +121,8 @@ function addRequiredCourses() {
                     <td><input type="number" name="courseUnits" value="${course.units}" placeholder="مثلا 2 واحد" readonly></td>
                     <td><button id="button_x" onclick="removeRow(this)">X</button></td>
                 `;
+                newRow.classList.add('fade-in');
+                setTimeout(() => newRow.classList.remove('fade-in'), 500); // حذف کلاس انیمیشن پس از اتمام
             });
             updateRowNumbers(); // به‌روزرسانی شماره ردیف‌ها
         })
@@ -122,4 +134,36 @@ function updateRowNumbers() {
     for (let i = 0; i < rows.length; i++) {
         rows[i].getElementsByClassName('row-number')[0].innerText = i + 1;
     }
+}
+
+function showSuccessMessage() {
+    const messageElement = document.getElementById('successMessage');
+    messageElement.style.display = 'block';
+    setTimeout(() => {
+        messageElement.classList.add('show');
+    }, 10); // مقدار کوچکی از تأخیر برای فعال‌سازی ترنزیشن
+
+    setTimeout(() => {
+        messageElement.classList.remove('show');
+        setTimeout(() => {
+            messageElement.style.display = 'none';
+        }, 500); // زمان تطابق با مدت ترنزیشن در CSS
+    }, 2000); // پیام بعد از 2 ثانیه مخفی می‌شود
+}
+
+function saveGrades() {
+    const rows = document.getElementById('gradesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    const courses = [];
+
+    for (let i = 0; i < rows.length; i++) {
+        const name = rows[i].getElementsByTagName('input')[0].value;
+        const grade = rows[i].getElementsByTagName('input')[1].value;
+        const units = rows[i].getElementsByTagName('input')[2].value;
+        if (name || grade || units) {
+            courses.push({ name, grade, units });
+        }
+    }
+
+    localStorage.setItem('courses', JSON.stringify(courses));
+    showSuccessMessage(); // نمایش پیام موفقیت
 }

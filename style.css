@@ -1,3 +1,37 @@
+/* انیمیشن برای اضافه کردن ردیف */
+@keyframes fadeIn {
+    from {
+        opacity: .3;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* انیمیشن برای حذف کردن ردیف */
+@keyframes fadeOut {
+    from {
+        opacity: 0.5;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-250px);
+    }
+}
+
+/* کلاس برای اضافه کردن ردیف */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* کلاس برای حذف کردن ردیف */
+.fade-out {
+    animation: fadeOut 0.5s ease-in-out;
+}
+
 body {
     font-family: Arial, sans-serif;
     direction: rtl;
